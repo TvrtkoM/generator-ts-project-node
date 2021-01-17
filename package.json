@@ -1,7 +1,7 @@
 {
   "name": "@tvrtkom/generator-ts-project-node",
   "version": "1.0.1",
-  "description": "",
+  "description": "Simple generator for ts project with eslint and prettier",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
