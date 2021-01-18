@@ -21,7 +21,7 @@ module.exports = class extends Generator {
       {
         type: 'confirm',
         name: 'initializeGit',
-        message: 'Initialize empty git repository?'
+        message: 'Initialize git repository?'
       }
     ]);
   }
