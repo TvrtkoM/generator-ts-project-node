@@ -2,9 +2,7 @@
   "name": "@tvrtkom/generator-ts-project-node",
   "version": "1.0.2",
   "description": "Simple generator for ts project with eslint and prettier",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": { },
   "repository": {
     "type": "git",
     "url": "https://github.com/TvrtkoM/generator-ts-project-node"
@@ -13,7 +11,7 @@
   "keywords": [
     "yeoman-generator"
   ],
-  "author": "Tvrtko Majstorovic <tvrtkomaj@gmai.com>",
+  "author": "Tvrtko Majstorovic <tvrtkomaj@gmail.com>",
   "files": [
     "generators"
   ],
