@@ -1,9 +1,12 @@
 const Generator = require('yeoman-generator');
 
-function getDevDeps(framework) {
+function getDevDeps(framework, testFramework) {
   let deps = ['eslint', '@typescript-eslint/parser', '@typescript-eslint/eslint-plugin', 'dotenv'];
   if (framework === 'express') {
     deps = [...deps, '@types/express', 'nodemon', 'ts-node'];
+  }
+  if (testFramework === 'tsJest') {
+    deps = [...deps, 'jest', 'ts-jest', '@types/jest'];
   }
   return deps;
 }
@@ -14,6 +17,7 @@ function getDeps(framework) {
   if (framework === 'express') {
     deps = [...deps, 'express'];
   }
+  return deps;
 }
 
 module.exports = class extends Generator {
@@ -37,7 +41,7 @@ module.exports = class extends Generator {
       {
         type: 'list',
         name: 'framework',
-        message: 'Plan to use a framework maybe?',
+        message: 'Plan to use a framework?',
         choices: [
           {
             name: 'None',
@@ -46,6 +50,22 @@ module.exports = class extends Generator {
           {
             name: 'Express.js',
             value: 'express',
+          },
+        ],
+        default: 'none',
+      },
+      {
+        type: 'list',
+        name: 'testFramework',
+        message: 'Plan to use unit testing framework?',
+        choices: [
+          {
+            name: 'None',
+            value: 'none',
+          },
+          {
+            name: 'Jest (ts-jest)',
+            value: 'tsJest',
           },
         ],
         default: 'none',
@@ -64,6 +84,7 @@ module.exports = class extends Generator {
       author: this.appSettings.author,
       description: this.appSettings.description,
       framework: this.appSettings.framework,
+      testFramework: this.appSettings.testFramework,
     });
 
     this.fs.copy(this.templatePath('.eslint*'), this.destinationPath());
@@ -85,9 +106,15 @@ module.exports = class extends Generator {
   }
 
   installDependencies() {
-    this.npmInstall(getDeps(this.appSettings.framework));
-    this.npmInstall(getDevDeps(this.appSettings.framework), {
+    this.npmInstall(getDeps(this.appSettings.framework, this.appSettings.testFramework));
+    this.npmInstall(getDevDeps(this.appSettings.framework, this.appSettings.testFramework), {
       'save-dev': true,
     });
+  }
+
+  unitTestInit() {
+    if (this.appSettings.testFramework === 'tsJest') {
+      this.spawnCommandSync('npx', ['ts-jest', 'config:init']);
+    }
   }
 };

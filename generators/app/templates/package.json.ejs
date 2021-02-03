@@ -4,7 +4,8 @@
   "description": "<%= description %>",
   "scripts": {<% if(framework === 'express') { %>
     "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts"<% } %>
+    "dev": "nodemon src/index.ts",<% } %><% if (testFramework === 'tsJest') { %>
+    "test": "jest"<% } %>
   },
   "keywords": [],
   "author": "<%= author %>",
