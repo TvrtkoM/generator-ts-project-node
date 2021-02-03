@@ -19,7 +19,6 @@
     "yeoman-generator": "^4.12.0"
   },
   "devDependencies": {
-    "eslint": "^7.17.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint": "^7.17.0"
   }
 }
